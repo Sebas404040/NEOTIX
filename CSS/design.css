@@ -1,0 +1,149 @@
+@font-face {
+    font-family: "Fire Sans";
+    src: url("../fonts/FiraSans-ExtraBoldItalic.otf") format("opentype");
+    font-weight: bold;
+    font-style: italic;
+}
+
+@font-face {
+    font-family: "Open Sans";
+    src: url("../fonts/OpenSans-Regular.ttf") format("opentype");
+    font-weight: normal;
+    font-style: normal;
+}
+
+
+/* CSS para la index page */
+
+#background_index {
+    margin: 0;
+    padding: 0;
+    background-image: url("../Design_resources/fondo_index-2.png");
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-attachment: fixed;
+    background-position: center;
+}
+
+#header_brand {
+    background-color: white;
+    display: flex;
+    flex-direction: row;
+    top: auto;
+    justify-content: center;
+}
+
+.logo_brand {
+    width: 30%;
+    padding: 1%;
+}
+
+#main_index {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    color: white;
+    z-index: 100;
+    width: 60%;
+    height: 70vh;
+    padding-left: 2%;
+}
+
+.welcome_home {
+    display: flex;
+    flex-direction: column;
+}
+
+#home_h2 {
+    font-family:"Fire Sans";
+    font-size: 4rem;
+}
+
+#home_p {
+    font-family: "Open Sans";
+    font-size: 2rem;
+}
+
+.button_index {
+    position: relative;
+    text-decoration: none;
+    color: #fff;
+    background: linear-gradient(45deg, #0ce39a, #69007f, #fc0987);
+    border-radius: 10px;
+    font-size: 1.25em;
+    cursor: pointer;
+    font-family: "Fire Sans";
+    margin: auto;
+    padding: 10px;
+    width: 30%;
+  }
+  
+  .button_index span {
+    position: relative;
+    z-index: 1;
+  }
+  
+  .button_index::before {
+    content: "";
+    position: absolute;
+    inset: 1px;
+    background: #272727;
+    border-radius: 9px;
+    transition: 0.5s;
+  }
+  
+  .button_index:hover::before {
+    opacity: 0.7;
+  }
+  
+  .button_index::after {
+    content: "";
+    position: absolute;
+    inset: 0px;
+    background: linear-gradient(45deg, #0ce39a, #69007f, #fc0987);
+    border-radius: 9px;
+    transition: 0.5s;
+    opacity: 0;
+    filter: blur(20px);
+  }
+  
+  .button_index:hover:after {
+    opacity: 1;
+  }
+
+#carrito_index {
+    width: 50px;
+}
+
+#container_cubes {
+    display: flex;
+    flex-direction: row;
+}
+
+#Cubo_2 {
+    top:25vh;
+    right: 2vw;
+    position: absolute;
+    height: 10%;
+    z-index: 5;
+}
+
+#Cubo_1 {
+    height: 20%;
+    top:45vh;
+    right: 15vw;;
+    position: absolute;
+    z-index: 6;
+    animation: float 3s infinite;
+}
+
+#Cubo_1 {
+    animation-timing-function: cubic-bezier(1, 1, 1, 1);
+}
+
+@keyframes float {
+    0%{top:45vh}
+    30% {top: 25vh;}
+    70% {top: 55vh;}
+    100% {top: 45vh}
+}
