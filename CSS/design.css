@@ -120,14 +120,6 @@
     flex-direction: row;
 }
 
-#Cubo_2 {
-    top:25vh;
-    right: 2vw;
-    position: absolute;
-    height: 10%;
-    z-index: 5;
-}
-
 #Cubo_1 {
     height: 20%;
     top:45vh;
@@ -138,12 +130,30 @@
 }
 
 #Cubo_1 {
-    animation-timing-function: cubic-bezier(1, 1, 1, 1);
+    animation-timing-function: cubic-bezier(.55,.54,.72,1);
 }
 
 @keyframes float {
-    0%{top:45vh}
-    30% {top: 25vh;}
-    70% {top: 55vh;}
-    100% {top: 45vh}
+    0%   { top: 30vh; }
+    50%  { top: 25vh; }
+    100% { top: 30vh; }
+}
+
+#Cubo_2 {
+    top:25vh;
+    right: 2vw;
+    position: absolute;
+    height: 10%;
+    z-index: 5;
+    animation: float2 3s infinite
+}
+
+#Cubo_2 {
+    animation-timing-function: cubic-bezier(.55,.54,.72,1);
+}
+
+@keyframes float2 {
+    0%   { top: 20vh; }
+    50%  { top: 25vh; }
+    100% { top: 20vh; }
 }
