@@ -1,3 +1,4 @@
+/* Fuentes */
 @font-face {
     font-family: "Fire Sans";
     src: url("../fonts/FiraSans-ExtraBoldItalic.otf") format("opentype");
@@ -15,6 +16,7 @@
 
 /* CSS para la index page */
 
+/* estilos del fondo */
 #background_index {
     margin: 0;
     padding: 0;
@@ -25,6 +27,7 @@
     background-position: center;
 }
 
+/*Ajuste del contenedor header*/
 #header_brand {
     background-color: white;
     display: flex;
@@ -33,11 +36,13 @@
     justify-content: center;
 }
 
+/*logo NEOTIX*/
 .logo_brand {
     width: 30%;
     padding: 1%;
 }
 
+/*ajuste del contenedor principal*/
 #main_index {
     display: flex;
     flex-direction: row;
@@ -120,6 +125,7 @@
     flex-direction: row;
 }
 
+/*Animacion de los cubos*/
 #Cubo_1 {
     height: 20%;
     top:45vh;
@@ -156,4 +162,47 @@
     0%   { top: 20vh; }
     50%  { top: 25vh; }
     100% { top: 20vh; }
+}
+
+/* CSS para products page*/
+
+body {
+    margin: 0;
+    background-color: rgb(0, 0, 0);
+}
+
+.nav_tab {
+    background-color: white;
+}
+
+nav {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    padding: 10px;
+}
+
+#nav_logo {
+    width: 20%;
+    height: 30%;
+}
+
+#search_input {
+    height: 30%;
+}
+
+.nav_logos {
+    width: 2%;
+}
+
+#search_input {
+    width: 70%;
+    border: 2px solid rgb(0, 88, 52);
+    padding: 10px;
+    border-radius: 5px;
+    box-shadow: 0px 0px 20px rgb(0, 88, 52);
+    font-family: "Fire Sans";
+    background-color: #272727;
+    color: white;
 }
