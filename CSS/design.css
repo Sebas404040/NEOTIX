@@ -14,7 +14,8 @@
 }
 
 
-/* CSS para la index page */
+/* CSS para la index page 
+--------------------------------------------------------------------------*/
 
 /* estilos del fondo */
 #background_index {
@@ -69,6 +70,7 @@
     font-size: 2rem;
 }
 
+/*Diseño del boton de inicio (index page)*/
 .button_index {
     position: relative;
     text-decoration: none;
@@ -116,10 +118,7 @@
     opacity: 1;
   }
 
-#carrito_index {
-    width: 50px;
-}
-
+/*Contenedor de los cubos*/
 #container_cubes {
     display: flex;
     flex-direction: row;
@@ -164,13 +163,16 @@
     100% { top: 20vh; }
 }
 
-/* CSS para products page*/
+/* CSS para products page
+--------------------------------------------------------------------------*/
 
+/*fondo*/
 body {
     margin: 0;
     background-color: rgb(0, 0, 0);
 }
 
+/*Barra de navegación de la products page*/
 .nav_tab {
     background-color: white;
 }
@@ -188,10 +190,12 @@ nav {
     height: 30%;
 }
 
+/*Barra de busqueda*/
 #search_input {
     height: 30%;
 }
 
+/*logos de filtro y carrito de compras*/
 .nav_logos {
     width: 2%;
 }
@@ -207,21 +211,24 @@ nav {
     color: white;
 }
 
-/* CSS para la product info page*/
+/* CSS para la product info page
+--------------------------------------------------------------------------*/
 
+/*contenedor del producto*/
 #infoProduct_container {
     margin: 5%;
 }
 
+/*detalles del producto (imagen y datos del producto)*/
 #details_product {
     border: 2px solid rgb(0, 106, 133);
     background-color: rgb(0, 36, 70);
     border-radius: 5px;
 }
 
-/* From Uiverse.io by nikk7007 */ 
+/*Estilos del boton regresar*/
 .bubbles {
-    --c1: #212121; /* Recommendation: same background color */
+    --c1: #212121; 
     --c2: #8685ef;
     --size-letter: 22px;
     padding: 0.5em 1em;
@@ -285,8 +292,10 @@ nav {
     filter: brightness(0.9);
   }
 
-/* CSS para cart page*/
+/* CSS para cart page
+--------------------------------------------------------------------------*/
 
+/*estilos para la cabecera*/
 #header_cartPage {
     display: flex;
     flex-direction: row;
@@ -306,6 +315,7 @@ nav {
     width: 5%;
 }
 
+/*Boton de volver*/
 button {
     position: relative;
     padding: 10px 20px;
