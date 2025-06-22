@@ -211,19 +211,68 @@ nav {
     color: white;
 }
 
+#contenedorProductos {
+  color: rgb(0, 0, 0);
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 2rem;
+  padding: 2rem;
+  background-color: #000000;
+  font-family: "Open Sans";
+}
+
+.producto {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 20px;
+  gap: 20px;
+  border: 2px solid rgb(255, 255, 255);
+  box-shadow: 0px 0px 50px rgb(0, 88, 52);
+  border-radius: 20px;
+  background-color: white;
+  justify-content: center;
+}
+
+.imagen_producto {
+  width: 40%;
+  padding: 20px;
+  border-radius: 30px;
+}
+
+.oculto {
+  display: none !important;
+}
 /* CSS para la product info page
 --------------------------------------------------------------------------*/
 
 /*contenedor del producto*/
-#infoProduct_container {
-    margin: 5%;
+
+#detalleProducto {
+  margin: 10%;
 }
 
-/*detalles del producto (imagen y datos del producto)*/
-#details_product {
-    border: 2px solid rgb(0, 106, 133);
-    background-color: rgb(0, 36, 70);
-    border-radius: 5px;
+.contenedor_general {
+  color: white;
+  display: flex;
+  flex-direction: column-reverse;
+  align-items: center;
+  justify-content: center;
+  font-family: "Open Sans", sans-serif;
+  background-color: #000b34;
+  border: 2px solid rgb(0, 88, 52);
+  border-radius: 10px;
+  font-size: 1.5rem;
+  padding: 20px;
+  width: 80%;
+  max-width: 900px;
+  margin-top: 20px;
+}
+
+.imagen_producto_detalle {
+  width: 60%;
+  border-radius: 10px;
+  align-self: center;
 }
 
 /*Estilos del boton regresar*/
@@ -316,7 +365,7 @@ nav {
 }
 
 /*Boton de volver*/
-button {
+#button_agregar {
     position: relative;
     padding: 10px 20px;
     border-radius: 7px;
@@ -326,7 +375,7 @@ button {
     font-weight: 600;
     letter-spacing: 2px;
     background: transparent;
-    color: #000000;
+    color: #ffffff;
     overflow: hidden;
     box-shadow: 0 0 0 0 transparent;
     -webkit-transition: all 0.2s ease-in;
@@ -334,7 +383,7 @@ button {
     transition: all 0.2s ease-in;
   }
   
-  button:hover {
+  #button_agregar:hover {
     background: rgb(61, 106, 255);
     box-shadow: 0 0 30px 5px rgba(0, 142, 236, 0.815);
     -webkit-transition: all 0.2s ease-out;
@@ -342,13 +391,13 @@ button {
     transition: all 0.2s ease-out;
   }
   
-  button:hover::before {
+  #button_agregar:hover::before {
     -webkit-animation: sh02 0.5s 0s linear;
     -moz-animation: sh02 0.5s 0s linear;
     animation: sh02 0.5s 0s linear;
   }
   
-  button::before {
+  #button_agregar::before {
     content: '';
     display: block;
     width: 0px;
@@ -382,7 +431,7 @@ button {
     }
   }
   
-  button:active {
+  #button_agregar:active {
     box-shadow: 0 0 0 0 transparent;
     -webkit-transition: box-shadow 0.2s ease-in;
     -moz-transition: box-shadow 0.2s ease-in;

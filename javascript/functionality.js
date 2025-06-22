@@ -1,5 +1,6 @@
 const contenedorProductos = document.getElementById("contenedorProductos");
 const detalle = document.getElementById("detalleProducto");
+const barraNavegacion = document.querySelector("header.nav_tab");
 
 async function cargarProductos() {
     try {
@@ -42,8 +43,9 @@ function mostrarProductos(productos) {
 }
 
 function detalleProducto(producto) {
-    contenedorProductos.style.display = "none";
-    detalle.style.display = "block";
+    contenedorProductos.classList.add("oculto");
+    detalle.classList.remove("oculto");
+    barraNavegacion.style.display = "none";
 
     detalle.replaceChildren();
 
@@ -53,8 +55,10 @@ function detalleProducto(producto) {
     back_button.addEventListener("click", volver)
 
     const contenedor_general = document.createElement("div")
+    contenedor_general.classList.add("contenedor_general")
 
     const contenedorImagen = document.createElement("section")
+    contenedorImagen.classList.add("contenedorImagen")
     
     const imgDetalle = document.createElement("img");
     imgDetalle.setAttribute("src", producto.image);
@@ -80,7 +84,12 @@ function detalleProducto(producto) {
     stock.textContent = producto.count;
 
     const adquirir = document.createElement("button")
+    adquirir.id = "button_agregar"
     adquirir.textContent = "Agregar al carrito";
+    const span = document.createElement("span");
+    span.classList.add("text");
+    span.textContent = "Volver";
+    back_button.appendChild(span);
     
     contenedorInfoProducto.appendChild(categoria);
     contenedorInfoProducto.appendChild(nombre_producto);
@@ -97,8 +106,10 @@ function detalleProducto(producto) {
 }
 
 function volver() {
-    detalle.style.display = "none";
-    contenedorProductos.style.display = "block";
+    detalle.classList.add("oculto");
+    contenedorProductos.classList.remove("oculto");
+    barraNavegacion.style.display = "flex";
+
 }
 
 cargarProductos();
