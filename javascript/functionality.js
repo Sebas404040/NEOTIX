@@ -1,13 +1,15 @@
 const contenedorProductos = document.getElementById("contenedorProductos");
 const detalle = document.getElementById("detalleProducto");
 const barraNavegacion = document.querySelector("header.nav_tab");
+let productosTotal = [];
 
 async function cargarProductos() {
     try {
         const response = await fetch("https://fakestoreapi.com/products");
         const productos = await response.json();
 
-        mostrarProductos(productos);
+        productosTotal = productos;
+        mostrarProductos(productosTotal);
     } catch (error) {
         console.error("Error al cargar los productos:", error);
         const mensaje = document.createElement("p");
@@ -17,6 +19,7 @@ async function cargarProductos() {
 }
 
 function mostrarProductos(productos) {
+    contenedorProductos.replaceChildren();
     productos.forEach(producto => {
         const contenedorProducto = document.createElement("div");
         contenedorProducto.classList.add("producto");
@@ -41,6 +44,17 @@ function mostrarProductos(productos) {
         contenedorProductos.appendChild(contenedorProducto);
     });
 }
+
+const inputBusqueda = document.getElementById("search_input");
+
+inputBusqueda.addEventListener("input", () => {
+    const entrada = inputBusqueda.value.toLowerCase();
+
+    const filtrados = productosTotal.filter(producto =>
+        producto.category.toLowerCase().includes(entrada)
+    );
+    mostrarProductos(filtrados);
+})
 
 function detalleProducto(producto) {
     contenedorProductos.classList.add("oculto");
