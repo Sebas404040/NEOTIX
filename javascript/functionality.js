@@ -18,6 +18,18 @@ async function cargarProductos() {
     }
 }
 
+const button_filtro = document.getElementById("filtro_logo");
+const menu_filtro = document.getElementById("menu_filtro");
+
+button_filtro.addEventListener("click", () => {
+    menu_filtro.classList.toggle("oculto");
+});
+
+function mostrarCategorias(){
+    const unicaCategoria = [...new set(productosTotal.map(producto => producto.category))];
+    
+}
+
 function mostrarProductos(productos) {
     contenedorProductos.replaceChildren();
     productos.forEach(producto => {
