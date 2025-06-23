@@ -21,6 +21,11 @@ async function cargarProductos() {
 
 const button_filtro = document.getElementById("filtro_logo");
 const menu_filtro = document.getElementById("menu_filtro");
+const inputBusqueda = document.getElementById("search_input");
+
+inputBusqueda.addEventListener("input", busquedas);
+menu_filtro.addEventListener("change", busquedas);
+
 
 button_filtro.addEventListener("click", () => {
     menu_filtro.classList.toggle("oculto");
@@ -44,16 +49,19 @@ function mostrarCategorias(){
     });
 }
 
-menu_filtro.addEventListener("change", () => {
-    const categoria = menu_filtro.value;
+function busquedas() {
+    const inputProducto = inputBusqueda.value.toLowerCase();
+    const categoriaSeleccionada = menu_filtro.value;
 
-    if (categoria === "todas") {
-        mostrarProductos(productosTotal);
-    } else {
-        const filtrados = productosTotal.filter(producto => producto.category === categoria);
-        mostrarProductos(filtrados);
-    }
-});
+    const filtrados = productosTotal.filter(producto => {
+        const s_nombre = producto.title.toLowerCase().includes(inputProducto);
+        const s_categoria = categoriaSeleccionada === "todas" || producto.category === categoriaSeleccionada;
+
+        return s_nombre && s_categoria;
+    });
+
+    mostrarProductos(filtrados);
+}
 
 
 function mostrarProductos(productos) {
@@ -82,17 +90,6 @@ function mostrarProductos(productos) {
         contenedorProductos.appendChild(contenedorProducto);
     });
 }
-
-const inputBusqueda = document.getElementById("search_input");
-
-inputBusqueda.addEventListener("input", () => {
-    const entrada = inputBusqueda.value.toLowerCase();
-
-    const filtrados = productosTotal.filter(producto =>
-        producto.category.toLowerCase().includes(entrada)
-    );
-    mostrarProductos(filtrados);
-})
 
 function detalleProducto(producto) {
     contenedorProductos.classList.add("oculto");
