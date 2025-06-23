@@ -10,6 +10,7 @@ async function cargarProductos() {
 
         productosTotal = productos;
         mostrarProductos(productosTotal);
+        mostrarCategorias();
     } catch (error) {
         console.error("Error al cargar los productos:", error);
         const mensaje = document.createElement("p");
@@ -26,9 +27,34 @@ button_filtro.addEventListener("click", () => {
 });
 
 function mostrarCategorias(){
-    const unicaCategoria = [...new set(productosTotal.map(producto => producto.category))];
-    
+    const unicaCategoria = [...new Set(productosTotal.map(producto => producto.category))];
+
+    menu_filtro.replaceChildren();
+
+    const opcionTodo = document.createElement("option");
+    opcionTodo.value = "todas";
+    opcionTodo.textContent = "Todas las categorías";
+    menu_filtro.appendChild(opcionTodo);
+
+    unicaCategoria.forEach(category => {
+        const option = document.createElement("option");
+        option.value = category;
+        option.textContent = category;
+        menu_filtro.appendChild(option);
+    });
 }
+
+menu_filtro.addEventListener("change", () => {
+    const categoria = menu_filtro.value;
+
+    if (categoria === "todas") {
+        mostrarProductos(productosTotal);
+    } else {
+        const filtrados = productosTotal.filter(producto => producto.category === categoria);
+        mostrarProductos(filtrados);
+    }
+});
+
 
 function mostrarProductos(productos) {
     contenedorProductos.replaceChildren();
