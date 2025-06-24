@@ -33,3 +33,7 @@ En esta seccion del sitio web se agrega un contenedor con fondo azul mas amplio 
 En la vista del carrito de compras se guardaran todos los productos que el cliente desea mediante localStorage como la manera de guardar el almacenamiento de lo que se realice en la pagina. En un contenedor se encontraran todos los items deseados por el usaurio con los botones incrementar o reducir la cantidad que se desea solicitar ademas de añadir el total de la compra y un boton para pagar, aunque la funcionalidad para pagar por esta etapa aun no es necesaria de acuerdo con los requirimientos.
 
 
+![HTML_branch_image](./Readme_images/HTML%20branch%20logo.png)
+![CSS_branch_image](./Readme_images/CSS%20branch%20logo.png)
+![javaScript_branch_image](./Readme_images/JS_branch%20image.png)
+![Docs_branch_image](./Readme_images/Docs_branch%20image.png)
