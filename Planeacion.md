@@ -33,7 +33,29 @@ En esta seccion del sitio web se agrega un contenedor con fondo azul mas amplio 
 En la vista del carrito de compras se guardaran todos los productos que el cliente desea mediante localStorage como la manera de guardar el almacenamiento de lo que se realice en la pagina. En un contenedor se encontraran todos los items deseados por el usaurio con los botones incrementar o reducir la cantidad que se desea solicitar ademas de añadir el total de la compra y un boton para pagar, aunque la funcionalidad para pagar por esta etapa aun no es necesaria de acuerdo con los requirimientos.
 
 
+## Desarrollo de las ramas 
+
+### Rama HTML
 ![HTML_branch_image](./Readme_images/HTML%20branch%20logo.png)
+
+Rama donde se encuentra toda la estructura html de la pagina web de compras
+
+#### commits relevantes:
+<p align="center"> <img src="./Readme_images/HTML_commits2.png" alt="Commits HTML 2" width="600"/> <br/> <img src="./Readme_images/HTML_commits1.png" alt="Commits HTML 1" width="600"/> </p>
+
+#### Justificacion de archivos eliminados:
+![HTML_commits_1](./Readme_images/archivos_eliminados.png)
+El desarrollo de los distintos archivos HTML presentes en los commits de esta rama tuvo como objetivo inicial ofrecer múltiples vistas para facilitar la navegación del usuario. No obstante, siguiendo buenas prácticas de desarrollo, se decidió utilizarlos únicamente como referencia estructural durante la implementación de vistas dinámicas con JavaScript, con la excepción del archivo "Products_page.html", donde efectivamente se alojan dichas vistas.
+
+En conclusión, estos archivos fueron creados como guía temporal y posteriormente eliminados al no cumplir una función adicional dentro del proyecto. La versión final del sitio se desarrolló únicamente con dos archivos HTML principales: index.html y Products_page.html.
+
+#### Estructura HTML final de index.html:
+
+<p align="center"> <img src="./Readme_images/HTML_commits2.png" alt="Commits HTML 2" width="600"/> <br/> <img src="./Readme_images/HTML_commits1.png" alt="Commits HTML 1" width="600"/> </p>
+
+
+
+
 ![CSS_branch_image](./Readme_images/CSS%20branch%20logo.png)
 ![javaScript_branch_image](./Readme_images/JS_branch%20image.png)
 ![Docs_branch_image](./Readme_images/Docs_branch%20image.png)
