@@ -108,7 +108,27 @@ Sirve como contenedor central donde se integran, mediante JavaScript, las siguie
 
 Este archivo fue diseñado para trabajar en conjunto con el script functionality.js, evitando la fragmentación del proyecto en múltiples archivos HTML y promoviendo una arquitectura más dinámica, escalable y mantenible.
 
+<hr>
+
+### 🎨 Rama CSS:
 
 ![CSS_branch_image](./Readme_images/CSS%20branch%20logo.png)
+
+Rama que contiene todos los estilos CSS aplicados al sitio web de compras NeoTix. Aquí se definen los aspectos visuales del proyecto, incluyendo:
+
+- Diseño de interfaz y disposición de elementos (maquetación).
+
+- Animaciones sutiles como los cubos en la página de bienvenida.
+
+- Estilos responsivos para adaptar la experiencia a distintos dispositivos.
+
+- Personalización de botones, tarjetas de productos, navegación y carrito de compras.
+
+- El objetivo de esta rama es garantizar una experiencia visual moderna, coherente y atractiva, reforzando la identidad visual del sitio.
+
+
+
+
+
 ![javaScript_branch_image](./Readme_images/JS_branch%20image.png)
 ![Docs_branch_image](./Readme_images/Docs_branch%20image.png)
