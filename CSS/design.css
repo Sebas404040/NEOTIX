@@ -173,26 +173,42 @@ body {
 }
 
 /*Barra de navegación de la products page*/
+
+nav a {
+  display: inline-block;
+  flex-shrink: 0; /* que no se encoja */
+}
+
 .nav_tab {
     background-color: white;
 }
 
 nav {
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    justify-content: space-between;
-    padding: 10px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  padding: 10px;
+  gap: 10px;
 }
 
 #nav_logo {
-    width: 20%;
-    height: 30%;
+  width: 150px; 
+  height: auto; 
+  display: block; 
 }
 
 /*Barra de busqueda*/
 #search_input {
-    height: 30%;
+  flex-grow: 1;
+  min-width: 0;
+  border: 2px solid rgb(0, 88, 52);
+  padding: 10px;
+  border-radius: 5px;
+  box-shadow: 0px 0px 20px rgb(0, 88, 52);
+  font-family: "Fire Sans";
+  background-color: #272727;
+  color: white;
 }
 
 /*logos de filtro y carrito de compras*/
@@ -210,6 +226,34 @@ nav {
     background-color: #272727;
     color: white;
 }
+
+#menu_filtro {
+  font-family: "Fire Sans";
+  font-size: 1rem;
+  padding: 10px 15px;
+  border: 2px solid rgb(0, 88, 52);
+  border-radius: 8px;
+  background-color: #272727;
+  color: white;
+  box-shadow: 0px 0px 10px rgba(0, 255, 128, 0.5);
+  transition: all 0.3s ease-in-out;
+  background-repeat: no-repeat;
+  background-position: right 10px center;
+  background-size: 12px;
+  cursor: pointer;
+}
+
+#menu_filtro:hover {
+  box-shadow: 0px 0px 20px rgba(0, 255, 128, 0.8);
+  border-color: #00ff91;
+}
+
+#menu_filtro:focus {
+  outline: none;
+  border-color: #00ffc8;
+  box-shadow: 0 0 10px #00ffc8;
+}
+
 
 #contenedorProductos {
   color: rgb(0, 0, 0);
@@ -249,30 +293,42 @@ nav {
 /*contenedor del producto*/
 
 #detalleProducto {
-  margin: 10%;
+  margin: 1%;
 }
 
 .contenedor_general {
   color: white;
   display: flex;
-  flex-direction: column-reverse;
+  flex-direction: row;
   align-items: center;
-  justify-content: center;
+  justify-content: space-between;
   font-family: "Open Sans", sans-serif;
   background-color: #000b34;
-  border: 2px solid rgb(0, 88, 52);
+  border: 2px solid #005D66;
   border-radius: 10px;
   font-size: 1.5rem;
   padding: 20px;
-  width: 80%;
-  max-width: 900px;
   margin-top: 20px;
+  margin: 50px;
+  gap: 20px;
 }
 
 .imagen_producto_detalle {
-  width: 60%;
-  border-radius: 10px;
+  width: 100%;
+  border-radius: 5px;
   align-self: center;
+}
+
+.contenedorInfoProducto {
+  width: 55%;
+}
+
+.categoria {
+  border: 1px solid rgb(0, 177, 184);
+  border-radius: 10px;
+  display: inline-block;
+  padding: 10px;
+  font-family: "Fire Sans";
 }
 
 /*Estilos del boton regresar*/
@@ -345,13 +401,70 @@ nav {
 --------------------------------------------------------------------------*/
 
 /*estilos para la cabecera*/
+
+.mensaje {
+  color: white;
+  text-align: center;
+}
+
+.btn_volver {
+  font-size: 17px;
+  background: transparent;
+  border: none;
+  padding: 1em 1.5em;
+  color: #000000;
+  text-transform: uppercase;
+  position: relative;
+  transition: 0.5s ease;
+  cursor: pointer;
+  font-family: "Fire Sans";
+}
+
+.btn_volver::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  height: 2px;
+  width: 0;
+  background-color: #005D66;
+  transition: 0.5s ease;
+}
+
+.btn_volver:hover {
+  color: #005D66;
+  transition-delay: 0.5s;
+}
+
+.btn_volver:hover::before {
+  width: 100%;
+}
+
+.btn_volver::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  height: 0;
+  width: 100%;
+  background-color: #ffffff;
+  transition: 0.4s ease;
+  z-index: -1;
+}
+
+.btn_volver:hover::after {
+  height: 100%;
+  transition-delay: 0.4s;
+  color: #ff0303;
+}
+
 .header_cartPage {
     display: flex;
     flex-direction: row;
     align-items: center;
     justify-content: flex-start;
     gap: 20px;
-    background-color: white;
+    background-color: rgb(255, 255, 255);
     padding: 20px;
 }
 
@@ -363,6 +476,31 @@ nav {
 
 .cart_image_cart {
     width: 5%;
+}
+
+.btn_vaciar {
+  background: #005D66;
+  font-family: "Fire Sans";
+  padding: 0.6em 1.3em;
+  font-weight: 900;
+  font-size: 18px;
+  border: 3px solid black;
+  border-radius: 0.4em;
+  box-shadow: 0.1em 0.1em;
+  cursor: pointer;
+  padding: 10px;
+  color: white;
+  margin: 20px;
+}
+
+.btn_vaciar:hover {
+  transform: translate(-0.05em, -0.05em);
+  box-shadow: 0.15em 0.15em;
+}
+
+.btn_vaciar:active {
+  transform: translate(0.05em, 0.05em);
+  box-shadow: 0.05em 0.05em;
 }
 
 #carrito {
@@ -382,20 +520,30 @@ nav {
   background-color: #fff;
   border-radius: 15px;
   padding: 10px;
+  width: 70%;
 }
 
 .producto-carrito {
   padding: 10px;
-  border: 3px solid rgb(2, 85, 73);
+  border: 3px solid #005D66;
   border-radius: 10px;
-  box-shadow: 0px 0px 20px rgb(2, 85, 73);
+  box-shadow: 0px 0px 20px #005D66;
   display: flex;
   flex-direction: row;
+  align-items: center;
+  gap: 10px;
+  justify-content: space-between;
 }
 
-.algortihmButtons {
+.imagen-producto_carrito {
+  width: 10%;
+}
+
+.algorithmButtons {
   display: flex;
   flex-direction: row;
+  gap: 10px;
+  padding: 10px;
 }
 
 .buttonsSR {
@@ -407,9 +555,32 @@ nav {
   flex-direction: row;
   gap: 40px;
   padding: 20px;
+  align-items: center;
 }
 
-/*Boton de volver*/
+.pago_container {
+  color: white;
+  display: flex;
+  flex-direction: column;
+  width: 50%;
+}
+
+.btn_pagar {
+  font-family: "Fire Sans";
+  background-color: #005D66;
+  font-size: 2rem;
+  color: white;
+  padding: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+}
+
+.card_logo {
+  width: 40px;
+}
+
 #button_agregar {
     position: relative;
     padding: 10px 20px;
