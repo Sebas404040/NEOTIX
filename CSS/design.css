@@ -216,17 +216,7 @@ nav {
     width: 2%;
 }
 
-#search_input {
-    width: 70%;
-    border: 2px solid rgb(0, 88, 52);
-    padding: 10px;
-    border-radius: 5px;
-    box-shadow: 0px 0px 20px rgb(0, 88, 52);
-    font-family: "Fire Sans";
-    background-color: #272727;
-    color: white;
-}
-
+/*Select para seleccionar el filtro*/
 #menu_filtro {
   font-family: "Fire Sans";
   font-size: 1rem;
@@ -254,7 +244,7 @@ nav {
   box-shadow: 0 0 10px #00ffc8;
 }
 
-
+/*Contenedor donde se crean dinamicamente los productos*/
 #contenedorProductos {
   color: rgb(0, 0, 0);
   display: grid;
@@ -265,6 +255,7 @@ nav {
   font-family: "Open Sans";
 }
 
+/*contenedor donde se crea dinamicamente e individualmente un producto*/
 .producto {
   display: flex;
   flex-direction: column;
@@ -278,12 +269,14 @@ nav {
   justify-content: center;
 }
 
+/*Imagen del producto*/
 .imagen_producto {
   width: 40%;
   padding: 20px;
   border-radius: 30px;
 }
 
+/*(IMPORTANTE) clase que permite ocultar y mostrar el contenido de las vistas*/
 .oculto {
   display: none !important;
 }
@@ -291,11 +284,11 @@ nav {
 --------------------------------------------------------------------------*/
 
 /*contenedor del producto*/
-
 #detalleProducto {
   margin: 1%;
 }
 
+/*Contenedor don estan los otros dos contenedores(imagen_producto_detalle y contenedorInfoProducto)*/
 .contenedor_general {
   color: white;
   display: flex;
@@ -313,6 +306,7 @@ nav {
   gap: 20px;
 }
 
+/*Imagen del producto*/
 .imagen_producto_detalle {
   width: 100%;
   border-radius: 5px;
@@ -320,9 +314,11 @@ nav {
 }
 
 .contenedorInfoProducto {
+  /*Contenedor donde se aloja toda la información del producto*/
   width: 55%;
 }
 
+/*Categoria del producto*/
 .categoria {
   border: 1px solid rgb(0, 177, 184);
   border-radius: 10px;
@@ -397,190 +393,7 @@ nav {
     filter: brightness(0.9);
   }
 
-/* CSS para cart page
---------------------------------------------------------------------------*/
-
-/*estilos para la cabecera*/
-
-.mensaje {
-  color: white;
-  text-align: center;
-}
-
-.btn_volver {
-  font-size: 17px;
-  background: transparent;
-  border: none;
-  padding: 1em 1.5em;
-  color: #000000;
-  text-transform: uppercase;
-  position: relative;
-  transition: 0.5s ease;
-  cursor: pointer;
-  font-family: "Fire Sans";
-}
-
-.btn_volver::before {
-  content: "";
-  position: absolute;
-  left: 0;
-  bottom: 0;
-  height: 2px;
-  width: 0;
-  background-color: #005D66;
-  transition: 0.5s ease;
-}
-
-.btn_volver:hover {
-  color: #005D66;
-  transition-delay: 0.5s;
-}
-
-.btn_volver:hover::before {
-  width: 100%;
-}
-
-.btn_volver::after {
-  content: "";
-  position: absolute;
-  left: 0;
-  bottom: 0;
-  height: 0;
-  width: 100%;
-  background-color: #ffffff;
-  transition: 0.4s ease;
-  z-index: -1;
-}
-
-.btn_volver:hover::after {
-  height: 100%;
-  transition-delay: 0.4s;
-  color: #ff0303;
-}
-
-.header_cartPage {
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    justify-content: flex-start;
-    gap: 20px;
-    background-color: rgb(255, 255, 255);
-    padding: 20px;
-}
-
-.cart_title {
-    font-family: "Fire Sans";
-    font-size: 3rem;
-    color: #000000;
-}
-
-.cart_image_cart {
-    width: 5%;
-}
-
-.btn_vaciar {
-  background: #005D66;
-  font-family: "Fire Sans";
-  padding: 0.6em 1.3em;
-  font-weight: 900;
-  font-size: 18px;
-  border: 3px solid black;
-  border-radius: 0.4em;
-  box-shadow: 0.1em 0.1em;
-  cursor: pointer;
-  padding: 10px;
-  color: white;
-  margin: 20px;
-}
-
-.btn_vaciar:hover {
-  transform: translate(-0.05em, -0.05em);
-  box-shadow: 0.15em 0.15em;
-}
-
-.btn_vaciar:active {
-  transform: translate(0.05em, 0.05em);
-  box-shadow: 0.05em 0.05em;
-}
-
-#carrito {
-  font-family: "Open Sans";
-}
-
-.span_items {
-  font-family: "Fire Sans";
-  text-align: center;
-}
-
-.items_cart {
-  color: #000000;
-  display: flex;
-  flex-direction: column;
-  gap: 20px;
-  background-color: #fff;
-  border-radius: 15px;
-  padding: 10px;
-  width: 70%;
-}
-
-.producto-carrito {
-  padding: 10px;
-  border: 3px solid #005D66;
-  border-radius: 10px;
-  box-shadow: 0px 0px 20px #005D66;
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  gap: 10px;
-  justify-content: space-between;
-}
-
-.imagen-producto_carrito {
-  width: 10%;
-}
-
-.algorithmButtons {
-  display: flex;
-  flex-direction: row;
-  gap: 10px;
-  padding: 10px;
-}
-
-.buttonsSR {
-  width: 30px;
-}
-
-.cart_container {
-  display: flex;
-  flex-direction: row;
-  gap: 40px;
-  padding: 20px;
-  align-items: center;
-}
-
-.pago_container {
-  color: white;
-  display: flex;
-  flex-direction: column;
-  width: 50%;
-}
-
-.btn_pagar {
-  font-family: "Fire Sans";
-  background-color: #005D66;
-  font-size: 2rem;
-  color: white;
-  padding: 10px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 10px;
-}
-
-.card_logo {
-  width: 40px;
-}
-
+  /*Boton para agregar el producto*/
 #button_agregar {
     position: relative;
     padding: 10px 20px;
@@ -653,4 +466,203 @@ nav {
     -moz-transition: box-shadow 0.2s ease-in;
     transition: box-shadow 0.2s ease-in;
   }
+
+/* CSS para cart page
+--------------------------------------------------------------------------*/
+
+/*Mensaje en caso tal que no hayan productos en el carro*/
+.mensaje {
+  color: white;
+  text-align: center;
+}
+
+/*Estilos para la cabecera*/
+
+/*header de la cart page*/
+.header_cartPage {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: flex-start;
+    gap: 20px;
+    background-color: rgb(255, 255, 255);
+    padding: 20px;
+}
+
+/*Boton para regresar a la products page*/
+.btn_volver {
+  font-size: 17px;
+  background: transparent;
+  border: none;
+  padding: 1em 1.5em;
+  color: #000000;
+  text-transform: uppercase;
+  position: relative;
+  transition: 0.5s ease;
+  cursor: pointer;
+  font-family: "Fire Sans";
+}
+
+.btn_volver::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  height: 2px;
+  width: 0;
+  background-color: #005D66;
+  transition: 0.5s ease;
+}
+
+.btn_volver:hover {
+  color: #005D66;
+  transition-delay: 0.5s;
+}
+
+.btn_volver:hover::before {
+  width: 100%;
+}
+
+.btn_volver::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  height: 0;
+  width: 100%;
+  background-color: #ffffff;
+  transition: 0.4s ease;
+  z-index: -1;
+}
+
+.btn_volver:hover::after {
+  height: 100%;
+  transition-delay: 0.4s;
+  color: #ff0303;
+}
+
+.cart_title {
+    font-family: "Fire Sans";
+    font-size: 3rem;
+    color: #000000;
+}
+
+.cart_image_cart {
+    width: 5%;
+}
+
+/*Boton para vaciar por completo el carrito de compras*/
+.btn_vaciar {
+  background: #005D66;
+  font-family: "Fire Sans";
+  padding: 0.6em 1.3em;
+  font-weight: 900;
+  font-size: 18px;
+  border: 3px solid black;
+  border-radius: 0.4em;
+  box-shadow: 0.1em 0.1em;
+  cursor: pointer;
+  padding: 10px;
+  color: white;
+  margin: 20px;
+}
+
+.btn_vaciar:hover {
+  transform: translate(-0.05em, -0.05em);
+  box-shadow: 0.15em 0.15em;
+}
+
+.btn_vaciar:active {
+  transform: translate(0.05em, 0.05em);
+  box-shadow: 0.05em 0.05em;
+}
+
+/*Id general para añadir la fuente a toda la vista*/
+#carrito {
+  font-family: "Open Sans";
+}
+
+/*Span ("Tus items")*/
+.span_items {
+  font-family: "Fire Sans";
+  text-align: center;
+}
+
+/*Contenedor en el que se alojan todos los items agregados al carrito*/
+.items_cart {
+  color: #000000;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  background-color: #fff;
+  border-radius: 15px;
+  padding: 10px;
+  width: 70%;
+}
+
+/*Contenedor individual para cada item*/
+.producto-carrito {
+  padding: 10px;
+  border: 3px solid #005D66;
+  border-radius: 10px;
+  box-shadow: 0px 0px 20px #005D66;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 10px;
+  justify-content: space-between;
+}
+
+/*Imagen para cada item del carrito*/
+.imagen-producto_carrito {
+  width: 10%;
+}
+
+/*Contenedor donde se ubican los botones de suma y resta*/
+.algorithmButtons {
+  display: flex;
+  flex-direction: row;
+  gap: 10px;
+  padding: 10px;
+}
+
+/*Botones de suma y resta*/
+.buttonsSR {
+  width: 30px;
+}
+
+/*Contenedor general donde se ubican dos contenedores hijos(pago_container y producto-carrito)*/
+.cart_container {
+  display: flex;
+  flex-direction: row;
+  gap: 40px;
+  padding: 20px;
+  align-items: center;
+}
+
+/*Contenedor de pagos*/
+.pago_container {
+  color: white;
+  display: flex;
+  flex-direction: column;
+  width: 50%;
+}
+
+/*Boton de pago*/
+.btn_pagar {
+  font-family: "Fire Sans";
+  background-color: #005D66;
+  font-size: 2rem;
+  color: white;
+  padding: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+}
+
+/*Logo de la tarjeta*/
+.card_logo {
+  width: 40px;
+}
   
