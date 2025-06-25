@@ -1,5 +1,8 @@
-# Maquetación y Estructuración
+# Bitácora de Diseño y Funcionalidad - NEOTIX
 
+Tablero KanBan | ClickUp
+
+https://app.clickup.com/90131736284/v/li/901314599067
 
 ## Maquetacion y Diseño
 
@@ -73,12 +76,12 @@ Esta vista está diseñada para ofrecer una experiencia de compra clara, ordenad
 
 ## Desarrollo de las ramas 
 
-### Rama HTML
+### 🧱 Rama HTML
 ![HTML_branch_image](./Readme_images/HTML%20branch%20logo.png)
 
 Rama donde se encuentra toda la estructura html de la pagina web de compras
 
-#### commits relevantes:
+#### ✅ commits relevantes:
 <p align="center"> <img src="./Readme_images/HTML_commits2.png" alt="Commits HTML 2" width="600"/> <br/> <img src="./Readme_images/HTML_commits1.png" alt="Commits HTML 1" width="600"/> </p>
 
 #### 🗑️ Justificacion de archivos eliminados:
@@ -126,9 +129,51 @@ Rama que contiene todos los estilos CSS aplicados al sitio web de compras NeoTix
 
 - El objetivo de esta rama es garantizar una experiencia visual moderna, coherente y atractiva, reforzando la identidad visual del sitio.
 
+#### ✅ Commits relevantes:
 
+![CSS_commits](./Readme_images/CSS_commits.png)
 
+#### Estilos para la index.html:
 
+El objetivo fue captar la atención del usuario desde el inicio y motivarlo a explorar el sitio de forma intuitiva y visualmente estimulante, cuidando tanto la legibilidad como la armonía visual. La distribución de elementos, tipografías y paleta de colores fueron elegidas para mantener coherencia con la identidad de la tienda.
 
+Por motivos estéticos, se implementó la función cubic-bezier para animar los cubos presentes en el diseño de la página principal. Esta elección permitió lograr una transición más fluida, dinámica y personalizada en los elementos decorativos, aportando modernidad y coherencia visual al estilo general del sitio.
+
+- Estilo final de index.html:
+
+![CSS_index](./Readme_images/CSS_index.png)
+
+#### Estilos y distribución en la Products Page:
+
+La página de productos cuenta con una barra de navegación de fondo claro que incluye una barra de búsqueda central y dos íconos (filtro y carrito), diseñados con los mismos colores que el logo de NEOTIX para mantener una coherencia visual.
+La distribución de los productos se implementó usando display: grid, acompañado de ajustes personalizados para asegurar su adaptación automática a diferentes tamaños de pantalla, garantizando una experiencia responsive fluida.
+Cada tarjeta de producto muestra de forma clara su imagen, nombre y precio, permitiendo al usuario explorar la tienda de manera intuitiva y ordenada.
+
+- Estilo final de products_page:
+
+![CSS_products](./Readme_images/CSS_products.png)
+
+#### Diseño de la vista de detalle del producto
+
+En esta sección se optó por un enfoque simple y minimalista, diseñado para dar total protagonismo al producto. El objetivo fue eliminar distracciones visuales y centrar la atención del usuario en la información esencial.
+La tarjeta de detalle muestra de forma clara y jerarquizada todos los datos relevantes: nombre del producto, precio, descripción, categoría e imagen en alta calidad. Esta disposición permite que el usuario pueda tomar decisiones informadas de forma cómoda y rápida.
+
+- Estilo final de la details_page
+
+![CSS_details](./Readme_images/CSS_details.png)
+
+#### Diseño de la vista del carrito de compras
+
+El diseño del carrito de compras mantiene coherencia con la paleta de colores general del sitio, reforzando la identidad visual de NEOTIX. Cada ítem agregado al carrito se presenta en una tarjeta con borde, sombra difusa y una estructura organizada que favorece la legibilidad y la comodidad del usuario.
+Los productos se distribuyen verticalmente dentro de un contenedor central, permitiendo identificar fácilmente la imagen, nombre, precio y cantidad. Además, se incluyen botones intuitivos para aumentar o disminuir la cantidad de cada producto.
+El encabezado de la vista se adapta para identificar claramente la sección, incorporando un botón de retorno, un ícono representativo del carrito y el título correspondiente, brindando contexto y continuidad al usuario.
+
+- Estilo final para la cart_page:
+
+![CSS_cart](./Readme_images/CSS_cart.png)
+
+<hr>
+
+### 🟡 Rama JavaScript
 ![javaScript_branch_image](./Readme_images/JS_branch%20image.png)
 ![Docs_branch_image](./Readme_images/Docs_branch%20image.png)
