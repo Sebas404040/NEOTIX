@@ -206,7 +206,300 @@ Toda la lógica fue desarrollada en JavaScript puro, manteniendo el código modu
 
 ### Funcionalidades principales realizadas:
 
+#### Manejo de las vistas:
+
+Como fue mencionado en la rama HTML, el manejo de las vistas dinamicas se realizo por JavaScript manejando solo un arhivo HTML como base para todas las vistas, bien, aqui se trata a detalle: 
+
+Segun el HTML, se capturaron las secciones que iban a ser las vistas de cada funcionalidad y que iban a ser modificadas usando una clase en CSS llamada ".oculto"
+
+```jsx
+// Creaciòn de los contenedores para las vistas 
+const contenedorProductos = document.getElementById("contenedorProductos");
+const detalle = document.getElementById("detalleProducto");
+const barraNavegacion = document.querySelector("header.nav_tab");
+```
+
 #### Mostrar los productos dinamicamente con JS:
+
+- El sitio web NEOTIX obtiene los productos desde la API brindada:
+https://fakestoreapi.com/products
+
+Esto se realiza mediante una función asíncrona que hace una consulta utilizando fetch(), permitiendo esperar la respuesta sin bloquear la ejecución del programa:
+
+```jsx
+//Funcion asincrona encargada de cargar los productos desde la API
+async function cargarProductos() {
+    try {
+        //Consulta a la API
+        const response = await fetch("https://fakestoreapi.com/products");
+        const productos = await response.json();
+
+        //Guarda los productos obtenidos en la variable global `productosTotal`.
+        productosTotal = productos;
+
+        //Llama a `mostrarProductos()` para renderizar los productos en pantalla.
+        mostrarProductos(productosTotal);
+        mostrarCategorias();
+    } catch (error) {
+
+        //Mostrar mensaje de error en caso de que falle la consulta
+        console.error("Error al cargar los productos:", error);
+        const mensaje = document.createElement("p");
+        mensaje.textContent = "No se pudieron cargar los productos.";
+        contenedorProductos.appendChild(mensaje);
+    }
+}
+```
+<br>
+
+Una vez obtenidos los productos desde la API, se utiliza una función específica para renderizarlos dinámicamente en el DOM. Esta función recibe como parámetro el array de productos (productos) y se encarga de:
+
+- Limpiar la vista anterior con replaceChildren().
+
+- Crear un contenedor individual por producto.
+
+- Añadir imagen, nombre y precio al contenedor.
+
+- Insertar cada tarjeta al contenedor principal.
+
+- Utilizar forEach() para recorrer y procesar cada elemento.
+
+```jsx
+function mostrarProductos(productos) {
+    contenedorProductos.replaceChildren();  // Limpia contenido anterior
+    productos.forEach(producto => {
+        const contenedorProducto = document.createElement("div"); // Crea contenedorProducto
+        contenedorProducto.classList.add("producto");
+
+        // Crea la imagen del producto
+        const img = document.createElement("img");
+        img.setAttribute("src", producto.image);
+        img.setAttribute("alt", producto.title);
+        img.classList.add("imagen_producto")
+
+        // Nombre del producto
+        const nombre_producto = document.createElement("strong");
+        nombre_producto.textContent = producto.title;
+
+        // Precio del producto
+        const precio = document.createElement("span");
+        precio.textContent = `$${producto.price}`;
+
+        // Armado de la tarjeta del producto
+        contenedorProducto.appendChild(img);
+        contenedorProducto.appendChild(nombre_producto);
+        contenedorProducto.appendChild(precio);
+
+        // Evento que permite mostrar los detalles del producto
+        contenedorProducto.addEventListener("click", () => detalleProducto(producto));
+
+        // Agregar al DOM
+        contenedorProductos.appendChild(contenedorProducto);
+    });
+}
+```
+
+#### Funciones de filtrado y busqueda desde la barra de navegacion:
+
+Antes de aplicar cualquier lógica funcional, se capturan los elementos clave del DOM que estarán involucrados en los eventos de búsqueda y filtrado. Esto incluye el ícono del filtro, el menú desplegable (select) de categorías y la barra de búsqueda y se le asigan los eventos a cada uno.
+
+```jsx
+//Captura de los elementos del filtro, el select y la barra de busqueda
+const button_filtro = document.getElementById("filtro_logo");
+const menu_filtro = document.getElementById("menu_filtro");
+const inputBusqueda = document.getElementById("search_input");
+
+// Asigna la función 'busquedas' como manejadora de eventos para:
+// El evento 'input' en el campo de búsqueda (se ejecuta cada vez que el usuario escribe).
+inputBusqueda.addEventListener("input", busquedas);
+
+// El evento 'change' en el menú desplegable de categorías (se ejecuta al seleccionar una categoría).
+menu_filtro.addEventListener("change", busquedas);
+
+// Asigna un evento al ícono de filtro que alterna (muestra/oculta) el menú desplegable de categorías
+// Esto permite que el menú solo se muestre cuando el usuario lo necesita.
+button_filtro.addEventListener("click", () => {
+    menu_filtro.classList.toggle("oculto");
+});
+```
+<br>
+
+Esta función se encarga de gestionar tanto la barra de búsqueda como el filtro por categoría de forma simultánea. Primero, se captura el valor ingresado en el campo de búsqueda y se transforma a minúsculas para garantizar una comparación insensible a mayúsculas y minúsculas. Luego, se obtiene el valor seleccionado en el menú desplegable de categorías.
+
+A continuación, se utiliza el método .filter() sobre el conjunto total de productos para obtener únicamente aquellos que cumplan ambas condiciones: que el nombre coincida parcial o totalmente con el texto buscado, y que pertenezcan a la categoría seleccionada (o a todas si no hay filtro activo).
+
+```jsx
+// Funcion que filtra los productos en base al texto de búsqueda y a la categoría seleccionada.
+function busquedas() {
+    const inputProducto = inputBusqueda.value.toLowerCase(); // Texto del buscador en minúsculas
+    const categoriaSeleccionada = menu_filtro.value; // Categoría elegida en el menú
+
+    const filtrados = productosTotal.filter(producto => {
+        const s_nombre = producto.title.toLowerCase().includes(inputProducto); // Coincidencia por nombre
+        const s_categoria = categoriaSeleccionada === "todas" || producto.category === categoriaSeleccionada;  // Coincidencia por categoría
+
+        return s_nombre && s_categoria; // Retorna los productos que cumplan con ambas condiciones
+    });
+
+    mostrarProductos(filtrados); // Renderiza los productos filtrados
+}
+```
+
+<br>
+
+#### Funcion para mostrar los detalles de un producto:
+
+Esta función se activa al hacer clic sobre un producto, y se encarga de renderizar una vista detallada del mismo. Primero, limpia la vista principal de productos y oculta la barra de navegación para enfocar al usuario en el producto seleccionado.
+
+A continuación, se crean los contenedores necesarios: uno principal, uno para la imagen y otro para la información del producto. En esta vista se muestra dinámicamente el nombre, precio, descripción, categoría e imagen del producto.
+
+Además, se incorporan dos botones clave:
+
+- Volver: permite regresar a la vista general de productos.
+
+- Agregar al carrito: almacena el producto en localStorage, asegurando persistencia incluso si se recarga la página.
+
+Este enfoque mejora la experiencia del usuario al ofrecer una transición fluida y enfocada entre vistas.
+
+```jsx
+function detalleProducto(producto) {
+
+    // Oculta secciones innecesarias y muestra la de detalles
+    contenedorProductos.classList.add("oculto");
+    detalle.classList.remove("oculto");
+    barraNavegacion.classList.add("oculto");
+
+    detalle.replaceChildren(); // Limpia contenido previo
+
+    // Botón volver
+    const back_button = document.createElement("button");
+    back_button.textContent = "Volver";
+    back_button.classList.add("bubbles");
+    back_button.addEventListener("click", volver)
+
+    // Contenedor principal
+    const contenedor_general = document.createElement("div")
+    contenedor_general.classList.add("contenedor_general")
+
+    // Contenedor para la imagen
+    const contenedorImagen = document.createElement("section")
+    contenedorImagen.classList.add("contenedorImagen")
+
+    const imgDetalle = document.createElement("img");
+    imgDetalle.setAttribute("src", producto.image);
+    imgDetalle.setAttribute("alt", producto.title);
+    imgDetalle.classList.add("imagen_producto_detalle");
+
+    // Contenedor de información
+    const contenedorInfoProducto = document.createElement("section");
+
+    const categoria = document.createElement("div");
+    categoria.textContent = producto.category;
+    categoria.classList.add("categoria");
+
+    const nombre_producto = document.createElement("h3");
+    nombre_producto.textContent = producto.title;
+
+    const precio = document.createElement("span");
+    precio.textContent = `$${producto.price}`;
+
+    const descripcion = document.createElement("p");
+    descripcion.textContent = producto.description;
+
+    const stock = document.createElement("span");
+    stock.textContent = producto.count;
+
+    // Botón para agregar al carrito
+    const adquirir = document.createElement("button")
+    adquirir.id = "button_agregar"
+    adquirir.textContent = "Agregar al carrito";
+
+    // Evento que es ejecutado al hacer click en el boton "Agregar al carrito"
+    adquirir.addEventListener("click", () => {
+
+        // Recupera el carrito desde localStorage o lo inicializa como arreglo vacío si no existe
+        let carrito = JSON.parse(localStorage.getItem("carrito")) || [];
+
+        // Verifica si el producto ya existe en el carrito
+        const productoExistente = carrito.find(p => p.id === producto.id);
+
+        if (productoExistente) {
+            // Si el producto ya está en el carrito, incrementa su cantidad
+            productoExistente.cantidad += 1;
+        } else {
+            // Si no está, lo agrega con cantidad 1
+            carrito.push({
+                id: producto.id,
+                title: producto.title,
+                price: producto.price,
+                image: producto.image,
+                cantidad: 1
+            });
+        }
+
+        // Guarda el carrito actualizado en localStorage
+        localStorage.setItem("carrito", JSON.stringify(carrito));
+
+        // Cambia el texto del botón para indicar que el producto fue añadido
+        adquirir.textContent = "Producto añadido";
+        adquirir.disabled = true; // Desactiva el botón para evitar duplicados inmediatos
+    });
+
+    const span = document.createElement("span");
+    span.classList.add("text");
+    span.textContent = "Volver";
+    back_button.appendChild(span);
+
+    // Armar la sección informativa
+    contenedorInfoProducto.appendChild(categoria);
+    contenedorInfoProducto.appendChild(nombre_producto);
+    contenedorInfoProducto.appendChild(precio);
+    contenedorInfoProducto.appendChild(descripcion);
+    contenedorInfoProducto.appendChild(stock);
+    contenedorInfoProducto.appendChild(adquirir);
+    contenedorImagen.appendChild(imgDetalle);
+
+    // Agregar secciones al contenedor principal
+    contenedor_general.appendChild(contenedorImagen);
+    contenedor_general.appendChild(contenedorInfoProducto);
+
+    // Insertar todo en el DOM
+    detalle.appendChild(back_button);
+    detalle.appendChild(contenedor_general);
+
+}
+```
+La manera en como se implemento el guardado en localStorage fue: 
+
+Concentremonos en esta porcion de codigo: 
+
+```jsx
+adquirir.addEventListener("click", () => {
+
+        // Recupera el carrito desde localStorage o lo inicializa como arreglo vacío si no existe
+        let carrito = JSON.parse(localStorage.getItem("carrito")) || [];
+
+        // Verifica si el producto ya existe en el carrito
+        const productoExistente = carrito.find(p => p.id === producto.id);
+
+        if (productoExistente) {
+            // Si el producto ya está en el carrito, incrementa su cantidad
+            productoExistente.cantidad += 1;
+        } else {
+            // Si no está, lo agrega con cantidad 1
+            carrito.push({
+                id: producto.id,
+                title: producto.title,
+                price: producto.price,
+                image: producto.image,
+                cantidad: 1
+            });
+        }
+
+        // Guarda el carrito actualizado en localStorage
+        localStorage.setItem("carrito", JSON.stringify(carrito));
+```
+
 
 
 
