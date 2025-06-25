@@ -1,16 +1,50 @@
 # Bitácora de Diseño y Funcionalidad - NEOTIX
 
+## 📘 Introducción
+La presente documentación tiene como objetivo detallar el desarrollo de un proyecto web completo para una tienda virtual llamada NeoTix, desde su estructura técnica hasta sus decisiones visuales y funcionales. A lo largo del documento se exponen los aspectos fundamentales que componen el proyecto, dividiendo su explicación por ramas o secciones clave.
+
+En primer lugar, se describen las decisiones de diseño y estilos aplicadas a cada una de las vistas (index, productos, detalle y carrito), justificando el uso de paletas de color, estructuras visuales y animaciones. Se explica cómo se logró una experiencia responsiva y fluida para el usuario.
+
+Seguido a esto, se aborda la lógica funcional implementada con JavaScript, incluyendo:
+
+- La consulta de productos desde una API externa
+
+- La renderización dinámica de tarjetas de producto
+
+- Los filtros y barra de búsqueda interactiva
+
+- El sistema completo de carrito de compras con almacenamiento en localStorage
+
+- La vista detallada de cada producto con botón de compra
+
+Cada función ha sido explicada y comentada para facilitar su comprensión y mantenimiento, siguiendo buenas prácticas de desarrollo.
+
+Además, se documenta la organización del proyecto, el uso de método Kanban mediante un tablero de ClickUp para una planificación clara, así como una conclusión general que resalta el valor del desarrollo logrado.
+
+Esta documentación busca no solo describir el funcionamiento del sitio web, sino también dejar constancia del proceso, la intención detrás de cada decisión, y el esfuerzo aplicado para construir una solución profesional y escalable.
+## Planeación
+
 Tablero KanBan | ClickUp
 
 https://app.clickup.com/90131736284/v/li/901314599067
-
-## Planeación
 
 ### Estructura planeada
 
 ![Estructura planeada](./Readme_images/Estructura%20planeada.png)
 
-En la estructura planeada se quiere implementar 4 paginas, una que sea la index page que es la bienvenida al usuario apenas ingresa al sitio web. En la pagina de compras_page se aparcan todos los productos consultados a la API y son ajustados y posicionados en el grid. En la pagina de detalle_producto se aloja la informacion del producto que se selecciona desde la pagina de compras_home. Finalmente en la pagina de carrito de compras se colocan los productos que son agregados desde la pagina de detalle producto, en el carrito de compras se puede modificar la cantidad de productos solicitados y la suma total.
+El proyecto está compuesto por cuatro páginas principales, cada una con una funcionalidad específica dentro del flujo de navegación del usuario:
+
+Página de Inicio (index.html):
+Es la página de bienvenida que recibe al usuario con una presentación llamativa y profesional. Su propósito es invitar al visitante a explorar los productos y generar una primera impresión sólida del sitio.
+
+Página de Productos (products_page.html):
+Esta sección muestra todos los productos obtenidos dinámicamente desde la API. Los productos se organizan visualmente mediante un display: grid, permitiendo una distribución limpia y responsive. Además, se incluyen herramientas de búsqueda y filtrado para facilitar la navegación.
+
+Página de Detalle de Producto (detalle_producto.html):
+Aquí se despliega la información completa de un producto seleccionado. Se muestra su nombre, imagen, descripción, categoría y precio. Desde esta vista, el usuario también puede agregar el producto al carrito.
+
+Página de Carrito de Compras (carrito.html):
+Esta vista presenta los productos añadidos por el usuario, organizados de manera intuitiva. Se permite modificar la cantidad de cada ítem y visualizar el total de la compra. También se ofrece la opción de vaciar el carrito completamente.
 
 ### Index_page
 
@@ -500,8 +534,227 @@ adquirir.addEventListener("click", () => {
         localStorage.setItem("carrito", JSON.stringify(carrito));
 ```
 
+Se crea un evento que se activa al hacer clic en el botón "Agregar al carrito". Este evento recupera el contenido del carrito desde localStorage, convirtiéndolo desde formato JSON si ya existe, o inicializándolo como un arreglo vacío si no. Luego, mediante el método find(), verifica si el producto ya está presente en el carrito: si lo está, incrementa su cantidad en uno; si no, lo añade como un nuevo objeto con una cantidad inicial de 1. Finalmente, el carrito actualizado se guarda nuevamente en localStorage como una cadena JSON para asegurar la persistencia de los datos.
 
 
+#### Funcion para renderizar el carrito de compras:
 
+La función showCarrito es la responsable de renderizar dinámicamente todos los productos añadidos al carrito de compras. Comienza limpiando cualquier contenido previo de la vista del carrito, luego obtiene los datos almacenados en localStorage (o un arreglo vacío si no hay nada guardado). A partir de esta informaqción, construye la estructura del carrito: encabezado, listado de productos con sus cantidades y botones de ajuste, sección de pago con el total acumulado, y un botón para vaciar el carrito. Todo esto se genera de forma dinámica para asegurar que la vista refleje siempre el estado actual del carrito. Para analizar esta funcion hay que desglosarla: 
 
-![Docs_branch_image](./Readme_images/Docs_branch%20image.png)
+Inicialmente, la función limpia el contenido existente de la sección del carrito para evitar duplicados. Luego, obtiene la información del carrito desde localStorage, o crea un arreglo vacío si no existe. A continuación, se construye el header del carrito y se genera un contenedor principal que alberga dos secciones clave: una para mostrar todos los ítems añadidos y otra destinada al total de la compra junto con el botón para procesar el pago.
+
+```jsx
+// Funcion que renderiza el carrito de compras
+function showCarrito() {
+
+    // Limpia el contenido actual del carrito (por si ya había productos mostrados antes)
+    sectionCarrito.replaceChildren();
+
+    // Obtiene el carrito desde localStorage (o un arreglo vacío si aún no hay nada)
+    const carrito = JSON.parse(localStorage.getItem("carrito")) || [];
+
+    // Contenedor principal de los productos en el carrito
+    const cartContainer = document.createElement("section");
+    cartContainer.classList.add("cart_container");
+
+    // === Encabezado del carrito ===
+    const header = document.createElement("header");
+    header.classList.add("header_cartPage");
+
+    const btnVolver = document.createElement("button");
+    btnVolver.textContent = "Volver";
+    btnVolver.classList.add("btn_volver");
+    btnVolver.addEventListener("click", () => {
+        // Al hacer clic en "Volver", oculta el carrito y muestra los productos principales
+        sectionCarrito.classList.add("oculto");
+        contenedorProductos.classList.remove("oculto");
+        barraNavegacion.classList.remove("oculto");
+    });
+
+    const cart_image_cart = document.createElement("img");
+    cart_image_cart.setAttribute("src", "../icons/carrito_logo.png");
+    cart_image_cart.setAttribute("alt", "Carrito de compras");
+    cart_image_cart.classList.add("cart_image_cart");
+
+    const cartTitle = document.createElement("span");
+    cartTitle.textContent = "Carrito de compras";
+    cartTitle.classList.add("cart_title");
+
+    header.appendChild(btnVolver);
+    header.appendChild(cart_image_cart);
+    header.appendChild(cartTitle);
+    sectionCarrito.appendChild(header);
+```
+
+<br>
+
+En este segmento de la función, se valida si el carrito está vacío. Si es así, se muestra un mensaje al usuario indicando que no hay productos añadidos. En caso contrario, se procede a renderizar los ítems del carrito. Para ello, se crea un contenedor general para alojar todos los productos y, mediante un forEach(), se itera sobre cada elemento del carrito. Durante la iteración, se construye dinámicamente un contenedor individual para cada producto, incluyendo su imagen, nombre, precio unitario y cantidad. Además, se generan dos botones que permiten incrementar o decrementar la cantidad de cada producto, modificando así el total de la compra en tiempo real.
+```jsx
+// === Si el carrito está vacío === muestra un mensaje de que esta vacio
+    if (carrito.length === 0) {
+        const mensaje = document.createElement("p");
+        mensaje.textContent = "Tu carrito está vacío";
+        mensaje.classList.add("mensaje")
+        cartContainer.appendChild(mensaje);
+    } else {
+        // === Si hay productos en el carrito === se crean los items del carrito de compras
+        let total = 0;
+
+        const items = document.createElement("div");
+        items.classList.add("items_cart");
+
+        const tus_items = document.createElement("span");
+        tus_items.textContent = "Tus items"
+        tus_items.classList.add("span_items")
+
+        items.appendChild(tus_items);
+
+        carrito.forEach(producto => {
+
+            // Contenedor de cada producto
+            const item = document.createElement("div");
+            item.classList.add("producto-carrito");
+
+            // Imagen del producto
+            const imagen = document.createElement("img")
+            imagen.setAttribute("src", producto.image);
+            imagen.setAttribute("alt", producto.title);
+            imagen.classList.add("imagen-producto_carrito");
+
+            // Nombre del producto
+            const nombre = document.createElement("p");
+            nombre.textContent = producto.title;
+
+            // Precio unitario
+            const precioUnitario = document.createElement("span");
+            precioUnitario.textContent = `Precio Unitario: $${producto.price}`;
+
+            // Sección para mostrar y modificar la cantidad
+            const containerCantidad = document.createElement("section");
+
+            const cantidad = document.createElement("span");
+            cantidad.textContent = `Cantidad: ${producto.cantidad}`;
+
+            // Botón para sumar la cantidad
+            const btnSumar = document.createElement("img");
+            btnSumar.setAttribute("src", "../icons/suma_logo.png");
+            btnSumar.setAttribute("alt", "sumar cantidad");
+            btnSumar.classList.add("buttonsSR");
+            btnSumar.addEventListener("click", () => actualizarCantidad(producto.id, 1));
+
+            // Botón para restar a la cantidad
+            const btnRestar = document.createElement("img");
+            btnRestar.setAttribute("src", "../icons/resta_logo.png");
+            btnRestar.setAttribute("alt", "restar cantidad");
+            btnRestar.classList.add("buttonsSR");
+            btnRestar.addEventListener("click", () => actualizarCantidad(producto.id, -1));
+
+            // Contenenedor de los botones
+            const algorithmButtons = document.createElement("div");
+            algorithmButtons.classList.add("algorithmButtons")
+
+            // Construccion del item
+            item.appendChild(imagen);
+            item.appendChild(nombre);
+            item.appendChild(precioUnitario);
+            containerCantidad.appendChild(cantidad);
+            algorithmButtons.appendChild(btnSumar);
+            algorithmButtons.appendChild(btnRestar);
+            containerCantidad.appendChild(algorithmButtons);
+            item.appendChild(containerCantidad);
+            items.appendChild(item);
+
+            // Acumulacion del total de la compra
+            total += producto.price * producto.cantidad;
+        });
+```
+
+En esta sección de la función, se agregan todos los productos al contenedor principal del carrito y se construye la zona destinada al pago. El total de la compra se formatea con toFixed(2) para mostrar siempre dos cifras decimales, siguiendo el estándar de precios. Además, se crea un botón de pago (actualmente sin funcionalidad activa) y un botón esencial que permite vaciar por completo el carrito, eliminando su contenido del localStorage. Al hacerlo, se vuelve a invocar la función showCarrito() para actualizar y reiniciar la vista del carrito de compras.
+```jsx
+ // Agrega todos los items al container del carrito
+        cartContainer.appendChild(items);
+
+        // === Sección de pago ===
+        const pago_container = document.createElement("section");
+        pago_container.classList.add("pago_container");
+
+        // Total de la compra
+        const totalCompra = document.createElement("h3");
+        totalCompra.textContent = `Total: $${total.toFixed(2)}`;
+
+        // Creacion del boton para pagar
+        const btnPagar = document.createElement("button");
+        btnPagar.textContent = "Pagar";
+        btnPagar.classList.add("btn_pagar");
+
+        // Imagen de la tarjeta de pago
+        const cardImage = document.createElement("img");
+        cardImage.setAttribute("src", "../icons/card_logo.png");
+        cardImage.setAttribute("alt", "card_logo");
+        cardImage.classList.add("card_logo")
+
+        // Boton para pagar
+        btnPagar.appendChild(cardImage);
+        pago_container.appendChild(totalCompra);
+        pago_container.appendChild(btnPagar);
+        cartContainer.appendChild(pago_container);
+
+        // Botón para vaciar el carrito
+        const btnVaciar = document.createElement("button");
+        btnVaciar.textContent = "Vaciar carrito";
+        btnVaciar.classList.add("btn_vaciar");
+        btnVaciar.addEventListener("click", () => {
+            localStorage.removeItem("carrito");
+            showCarrito(); // se llama a la funcion para reiniciar la vista del carrito tras vaciar
+        });
+
+        // Se agrega el boton de vaciar
+        sectionCarrito.appendChild(btnVaciar);
+    }
+
+    // Agrega el contenedor principal del carrito a la sección
+    sectionCarrito.appendChild(cartContainer);
+}
+```
+
+#### Funcion para cambiar el total segun el cambio en las cantidades (+1 -1)
+
+Primero, se obtiene el carrito almacenado en localStorage. En caso de que no exista, se inicializa como un arreglo vacío. Luego, mediante el método map(), se recorre el carrito buscando el producto cuyo id coincida con el recibido como parámetro.
+
+Si se encuentra el producto, se actualiza su cantidad sumando el valor del parámetro cambio. Si el resultado es mayor a cero, se asigna directamente; de lo contrario, se fuerza la cantidad mínima a 1 para evitar valores negativos o nulos.
+
+Una vez actualizada la cantidad, se guarda nuevamente el carrito en localStorage, convirtiéndolo en una cadena JSON. Finalmente, se llama a showCarrito() para renderizar la vista del carrito con los cambios reflejados.
+
+```jsx
+function actualizarCantidad(id, cambio) {
+
+    // Obtiene el carrito actual desde localStorage
+    let carrito = JSON.parse(localStorage.getItem("carrito")) || [];
+
+    // se mapea el carrito actualizando la cantidad del producto con el ID indicado
+    carrito = carrito.map(producto => {
+        if (producto.id === id) {
+            const nuevaCantidad = producto.cantidad + cambio;
+            return { ...producto, cantidad: nuevaCantidad > 0 ? nuevaCantidad : 1 };
+        }
+        return producto;
+    })
+
+    // Guarda el carrito actualizado en localStorage
+    localStorage.setItem("carrito", JSON.stringify(carrito));
+
+    // se llama a la funcion de showCarrito para mostrar la vista del carrito con los cambios aplicados
+    showCarrito();
+}
+```
+
+<hr>
+
+## ✅ Conclusión del Proyecto
+Este proyecto representa una solución completa para una tienda virtual funcional y moderna, diseñada con un enfoque en la experiencia del usuario, la organización del código y la escalabilidad. Se logró integrar múltiples vistas que permiten una navegación fluida entre productos, detalles y el carrito de compras, utilizando una arquitectura modular y funciones reutilizables en JavaScript.
+
+Además, se trabajó cuidadosamente en la estética visual, manteniendo una coherencia en la paleta de colores, animaciones suaves y un diseño responsive adaptado a distintos dispositivos. Cada componente —desde la carga de productos con fetch hasta la manipulación de localStorage para persistencia— fue implementado con buenas prácticas, comentarios claros y estructura semántica.
+
+Para la planificación y gestión del desarrollo, se utilizó un tablero de tareas en ClickUp basado en la metodología Kanban, lo cual permitió organizar el trabajo en etapas claras (por hacer, en progreso y finalizado), dar seguimiento a cada funcionalidad de manera eficiente y mantener el enfoque en los objetivos principales del proyecto.
+
+Este desarrollo no solo demuestra el dominio de HTML, CSS y JavaScript, sino también la capacidad de planear, estructurar y documentar un proyecto de principio a fin, considerando tanto la funcionalidad como la presentación.
