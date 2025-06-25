@@ -187,7 +187,7 @@ nav {
   display: flex;
   flex-direction: row;
   align-items: center;
-  justify-content: space-between;
+  justify-content: space-around;
   padding: 10px;
   gap: 10px;
 }
@@ -200,8 +200,7 @@ nav {
 
 /*Barra de busqueda*/
 #search_input {
-  flex-grow: 1;
-  min-width: 0;
+  width: 100%;
   border: 2px solid rgb(0, 88, 52);
   padding: 10px;
   border-radius: 5px;
@@ -209,11 +208,12 @@ nav {
   font-family: "Fire Sans";
   background-color: #272727;
   color: white;
+  box-sizing: border-box;
 }
 
 /*logos de filtro y carrito de compras*/
 .nav_logos {
-    width: 2%;
+    width: 3%;
 }
 
 /*Select para seleccionar el filtro*/
@@ -288,7 +288,7 @@ nav {
   margin: 1%;
 }
 
-/*Contenedor don estan los otros dos contenedores(imagen_producto_detalle y contenedorInfoProducto)*/
+/*Contenedor donde estan los otros dos contenedores(imagen_producto_detalle y contenedorInfoProducto)*/
 .contenedor_general {
   color: white;
   display: flex;
@@ -665,4 +665,161 @@ nav {
 .card_logo {
   width: 40px;
 }
-  
+
+/*RESPONSIVE DESIGN*/
+@media (max-width: 600px) {
+
+  /* ========Ajuste principal para pantallas pequeñas======== */
+  /*RESPONSIVE PARA LA INDEX PAGE*/
+  #main_index {
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 90%;
+    height: auto;
+    padding: 2rem 1rem;
+    margin: 0 auto;
+    text-align: center;
+  }
+
+  .logo_brand {
+    width: 70%;
+    max-width: 250px;
+    padding: 1rem;
+  }
+
+
+  .welcome_home {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-bottom: 2rem;
+  }
+
+  #home_h2 {
+    font-size: 2.2rem;
+    line-height: 1.2;
+    margin-bottom: 1rem;
+  }
+
+  #home_p {
+    font-size: 1.2rem;
+    line-height: 1.5;
+    padding: 0 1rem;
+    margin-bottom: 1.5rem;
+  }
+
+  .button_index {
+    width: auto;
+    padding: 10px 20px;
+    font-size: 1rem;
+  }
+  #container_cubes {
+    display: none;
+  }
+
+  /*RESPONSIVE PARA LA PRODUCTS_PAGE*/
+  nav {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  padding: 10px;
+  gap: 10px;
+  flex-wrap: wrap;
+  }
+
+  .nav_logos {
+    width: 10%;
+  }
+
+  #contenedorProductos {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 20px;
+  padding: 2rem;
+  }
+
+  /*RESPONSIVE PARA LA DETAILS_PAGE*/
+  .contenedor_general {
+    display: flex;
+    flex-direction: column;
+    margin: 10px;
+    font-size: 1rem;
+  }
+
+  /*RESPONSIVE PARA LA CART_PAGE*/
+  .header_cartPage {
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    gap: 10px;
+  }
+
+  .cart_title {
+    font-size: 2rem;
+  }
+
+  .cart_image_cart {
+    width: 15%;
+  }
+
+  .btn_volver,
+  .btn_vaciar {
+    font-size: 1rem;
+    padding: 10px;
+    width: 80%;
+    text-align: center;
+  }
+
+  .cart_container {
+    flex-direction: column;
+    padding: 10px;
+    gap: 20px;
+  }
+
+  .items_cart {
+    width: 100%;
+    padding: 10px;
+  }
+
+  .producto-carrito {
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+    text-align: center;
+  }
+
+  .imagen-producto_carrito {
+    width: 50%;
+  }
+
+  .algorithmButtons {
+    justify-content: center;
+    padding: 5px;
+  }
+
+  .buttonsSR {
+    width: 30px;
+  }
+
+  .pago_container {
+    width: 100%;
+    align-items: center;
+    text-align: center;
+  }
+
+  .btn_pagar {
+    font-size: 1.5rem;
+    width: 90%;
+  }
+
+  .card_logo {
+    width: 30px;
+  }
+
+  .span_items {
+    font-size: 1.2rem;
+    margin-top: 10px;
+  }
+}
