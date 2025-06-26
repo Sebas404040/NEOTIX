@@ -22,13 +22,14 @@ Cada función ha sido explicada y comentada para facilitar su comprensión y man
 Además, se documenta la organización del proyecto, el uso de método Kanban mediante un tablero de ClickUp para una planificación clara, así como una conclusión general que resalta el valor del desarrollo logrado.
 
 Esta documentación busca no solo describir el funcionamiento del sitio web, sino también dejar constancia del proceso, la intención detrás de cada decisión, y el esfuerzo aplicado para construir una solución profesional y escalable.
-## Planeación
+
+## 📆 Planeación
 
 Tablero KanBan | ClickUp
 
 https://app.clickup.com/90131736284/v/li/901314599067
 
-### Estructura planeada
+### 🏗️ Estructura planeada
 
 ![Estructura planeada](./Readme_images/Estructura%20planeada.png)
 
@@ -167,7 +168,7 @@ Rama que contiene todos los estilos CSS aplicados al sitio web de compras NeoTix
 
 ![CSS_commits](./Readme_images/CSS_commits.png)
 
-### Estilos para la index.html:
+### 🎨 Estilos para la index.html:
 
 El objetivo fue captar la atención del usuario desde el inicio y motivarlo a explorar el sitio de forma intuitiva y visualmente estimulante, cuidando tanto la legibilidad como la armonía visual. La distribución de elementos, tipografías y paleta de colores fueron elegidas para mantener coherencia con la identidad de la tienda.
 
@@ -177,7 +178,7 @@ Por motivos estéticos, se implementó la función cubic-bezier para animar los 
 
 ![CSS_index](./Readme_images/CSS_index.png)
 
-### Estilos y distribución en la Products Page:
+### 🎨 Estilos y distribución en la Products Page:
 
 La página de productos cuenta con una barra de navegación de fondo claro que incluye una barra de búsqueda central y dos íconos (filtro y carrito), diseñados con los mismos colores que el logo de NEOTIX para mantener una coherencia visual.
 La distribución de los productos se implementó usando display: grid, acompañado de ajustes personalizados para asegurar su adaptación automática a diferentes tamaños de pantalla, garantizando una experiencia responsive fluida.
@@ -187,7 +188,7 @@ Cada tarjeta de producto muestra de forma clara su imagen, nombre y precio, perm
 
 ![CSS_products](./Readme_images/CSS_products.png)
 
-### Diseño de la vista de detalle del producto
+### 🎨 Diseño de la vista de detalle del producto
 
 En esta sección se optó por un enfoque simple y minimalista, diseñado para dar total protagonismo al producto. El objetivo fue eliminar distracciones visuales y centrar la atención del usuario en la información esencial.
 La tarjeta de detalle muestra de forma clara y jerarquizada todos los datos relevantes: nombre del producto, precio, descripción, categoría e imagen en alta calidad. Esta disposición permite que el usuario pueda tomar decisiones informadas de forma cómoda y rápida.
@@ -196,7 +197,7 @@ La tarjeta de detalle muestra de forma clara y jerarquizada todos los datos rele
 
 ![CSS_details](./Readme_images/CSS_details.png)
 
-### Diseño de la vista del carrito de compras
+### 🎨 Diseño de la vista del carrito de compras
 
 El diseño del carrito de compras mantiene coherencia con la paleta de colores general del sitio, reforzando la identidad visual de NEOTIX. Cada ítem agregado al carrito se presenta en una tarjeta con borde, sombra difusa y una estructura organizada que favorece la legibilidad y la comodidad del usuario.
 Los productos se distribuyen verticalmente dentro de un contenedor central, permitiendo identificar fácilmente la imagen, nombre, precio y cantidad. Además, se incluyen botones intuitivos para aumentar o disminuir la cantidad de cada producto.
@@ -238,9 +239,9 @@ Toda la lógica fue desarrollada en JavaScript puro, manteniendo el código modu
 
 ![JS_commits](./Readme_images/JS_commits.png)
 
-### Funcionalidades principales realizadas:
+### ⚙️ Funcionalidades principales realizadas:
 
-#### Manejo de las vistas:
+#### 💻 Manejo de las vistas:
 
 Como fue mencionado en la rama HTML, el manejo de las vistas dinamicas se realizo por JavaScript manejando solo un arhivo HTML como base para todas las vistas, bien, aqui se trata a detalle: 
 
@@ -253,7 +254,7 @@ const detalle = document.getElementById("detalleProducto");
 const barraNavegacion = document.querySelector("header.nav_tab");
 ```
 
-#### Mostrar los productos dinamicamente con JS:
+#### 🔄 Mostrar los productos dinamicamente con JS:
 
 - El sitio web NEOTIX obtiene los productos desde la API brindada:
 https://fakestoreapi.com/products
@@ -333,7 +334,7 @@ function mostrarProductos(productos) {
 }
 ```
 
-#### Funciones de filtrado y busqueda desde la barra de navegacion:
+#### 🔎 Funciones de filtrado y busqueda desde la barra de navegacion:
 
 Antes de aplicar cualquier lógica funcional, se capturan los elementos clave del DOM que estarán involucrados en los eventos de búsqueda y filtrado. Esto incluye el ícono del filtro, el menú desplegable (select) de categorías y la barra de búsqueda y se le asigan los eventos a cada uno.
 
@@ -381,7 +382,7 @@ function busquedas() {
 
 <br>
 
-#### Funcion para mostrar los detalles de un producto:
+#### 📄 Funcion para mostrar los detalles de un producto:
 
 Esta función se activa al hacer clic sobre un producto, y se encarga de renderizar una vista detallada del mismo. Primero, limpia la vista principal de productos y oculta la barra de navegación para enfocar al usuario en el producto seleccionado.
 
@@ -537,7 +538,7 @@ adquirir.addEventListener("click", () => {
 Se crea un evento que se activa al hacer clic en el botón "Agregar al carrito". Este evento recupera el contenido del carrito desde localStorage, convirtiéndolo desde formato JSON si ya existe, o inicializándolo como un arreglo vacío si no. Luego, mediante el método find(), verifica si el producto ya está presente en el carrito: si lo está, incrementa su cantidad en uno; si no, lo añade como un nuevo objeto con una cantidad inicial de 1. Finalmente, el carrito actualizado se guarda nuevamente en localStorage como una cadena JSON para asegurar la persistencia de los datos.
 
 
-#### Funcion para renderizar el carrito de compras:
+#### 📚 Funcion para renderizar el carrito de compras:
 
 La función showCarrito es la responsable de renderizar dinámicamente todos los productos añadidos al carrito de compras. Comienza limpiando cualquier contenido previo de la vista del carrito, luego obtiene los datos almacenados en localStorage (o un arreglo vacío si no hay nada guardado). A partir de esta informaqción, construye la estructura del carrito: encabezado, listado de productos con sus cantidades y botones de ajuste, sección de pago con el total acumulado, y un botón para vaciar el carrito. Todo esto se genera de forma dinámica para asegurar que la vista refleje siempre el estado actual del carrito. Para analizar esta funcion hay que desglosarla: 
 
@@ -717,7 +718,7 @@ En esta sección de la función, se agregan todos los productos al contenedor pr
 }
 ```
 
-#### Funcion para cambiar el total segun el cambio en las cantidades (+1 -1)
+#### 🔢 Funcion para cambiar el total segun el cambio en las cantidades (+1 -1)
 
 Primero, se obtiene el carrito almacenado en localStorage. En caso de que no exista, se inicializa como un arreglo vacío. Luego, mediante el método map(), se recorre el carrito buscando el producto cuyo id coincida con el recibido como parámetro.
 
