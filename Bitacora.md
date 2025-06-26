@@ -168,6 +168,11 @@ Rama que contiene todos los estilos CSS aplicados al sitio web de compras NeoTix
 
 ![CSS_commits](./Readme_images/CSS_commits.png)
 
+### 🆎 Fuentes utilizadas:
+
+- Fire Sans ExtraBoldItalic
+- Open Sans-Regular
+
 ### 🎨 Estilos para la index.html:
 
 El objetivo fue captar la atención del usuario desde el inicio y motivarlo a explorar el sitio de forma intuitiva y visualmente estimulante, cuidando tanto la legibilidad como la armonía visual. La distribución de elementos, tipografías y paleta de colores fueron elegidas para mantener coherencia con la identidad de la tienda.
