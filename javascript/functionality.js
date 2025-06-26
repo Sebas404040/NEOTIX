@@ -142,7 +142,6 @@ function detalleProducto(producto) {
 
     // Botón volver
     const back_button = document.createElement("button");
-    back_button.textContent = "Volver";
     back_button.classList.add("bubbles");
     back_button.addEventListener("click", volver)
 
